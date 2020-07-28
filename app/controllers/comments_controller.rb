@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+    before_action :find_comment :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
 
     def new
     end
