@@ -41,7 +41,7 @@ class FilmsController < ApplicationController
     private
 
     def film_params
-        params.require(:film).permit(:title, :director, :year, :description)
+        params.require(:film).permit(:title, :director, :year, :description, :genre_id)
     end
 
     def redirect_if_not_user
