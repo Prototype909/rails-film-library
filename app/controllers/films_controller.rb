@@ -23,12 +23,19 @@ class FilmsController < ApplicationController
     end
 
     def update
+        if @film.update(film_params)
+            redirect_to film_path(@film)
+        else
+            render :edit
+        end
     end
 
     def show
     end
 
     def destroy
+        @film.destory
+        redirect_to film_path
     end
 
     private
