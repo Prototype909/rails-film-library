@@ -9,4 +9,13 @@ class User < ApplicationRecord
     validates :email, uniqueness: true
     validates :password, confirmation: true
     validates :password_confirmation, presence: true
+
+    def self.from_omniauth(response)
+        # Creates a new user only if it doesn't exist
+       User.find_or_create_by(uid: response[:uid], provider: response[:provider]) do |u|
+        u.username = response[:info][:name]
+        u.email = response[:info][:email]
+        u.password = SecureRandom.hex(15)
+        end
+    end
 end

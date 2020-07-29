@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  get ‘auth/:provider/callback’, to: ‘sessions#googleAuth’
-  get ‘auth/failure’, to: redirect(‘/’)
+  # Routes for Google authentication
+  get 'auth/:provider/callback', to: 'sessions#omniauth'
+  get 'auth/failure', to: redirect('/')
+  
 
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
