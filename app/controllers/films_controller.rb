@@ -1,9 +1,9 @@
 class FilmsController < ApplicationController
     before_action :find_film, :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
-    layout 'film'
+   
 
     def index
-        @film = Film.all
+        @films = Film.all
     end
 
     def new
@@ -11,7 +11,9 @@ class FilmsController < ApplicationController
     end
 
     def create
-        @film = current_user.films.build(film_params)
+        film = Film.create(film_params)
+        # @film = Film.new(film_params)
+        # @film = current_user.films.build(film_params)
         if @film.valid?
             @film.save
             redirect_to film_path(@film)
@@ -22,10 +24,13 @@ class FilmsController < ApplicationController
     end
 
     def edit
+        find_film
     end
 
     def update
-        if @film.update(film_params)
+        find_film
+        if @film.user == current_user
+            @film.update(film_params)
             redirect_to film_path(@film)
         else
             render :edit
@@ -36,7 +41,7 @@ class FilmsController < ApplicationController
     end
 
     def destroy
-        @film.destory
+        @film.destroy
         redirect_to film_path
     end
 

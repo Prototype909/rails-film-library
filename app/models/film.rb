@@ -4,8 +4,8 @@ class Film < ApplicationRecord
     has_many :comments
     has_many :users, through: :comments
 
-    validates :title, :director, :discription, presence: true
-    validates :year, numericality: {only_interger: true}
+    validates :title, :director, :description, presence: true
+    validates :year, numericality: {only_integer: true}
 end
 
 
