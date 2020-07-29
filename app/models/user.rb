@@ -7,8 +7,7 @@ class User < ApplicationRecord
 
     validates :username, :email, presence: true
     validates :email, uniqueness: true
-    validates :password, confirmation: true
-    validates :password_confirmation, presence: true
+    
 
     def self.from_omniauth(response)
         # Creates a new user only if it doesn't exist
