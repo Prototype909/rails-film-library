@@ -3,17 +3,16 @@ Rails.application.routes.draw do
 
   root 'welcome#home'
 
-  get '/signin' => 'sessions#new'
-  post '/signin' => 'sessions#create'
-  get '/signout' => 'sessions#destroy'
+  get ‘auth/:provider/callback’, to: ‘sessions#googleAuth’
+  get ‘auth/failure’, to: redirect(‘/’)
 
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
-  get '/users/:id', to: 'users#show', as: 'user'
-
-  get '/login' => 'session#new'
+  
+  get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  get '/logout' => 'session#destroy'
+  get '/logout' => 'sessions#destroy'
+  delete '/logout' => 'sessions#destroy'
 
   
   resources :users, only: [:new, :create, :show]

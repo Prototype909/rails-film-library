@@ -1,13 +1,2 @@
-<h1>Sign Up Here</h1>
-
-<%= form_with(model: @user, url:'/signup', local: true) do |f|%>
-    <%= f.label :username %>:
-    <%= f.text_field :username %><br><br>
-    <%= f.label :email %>:
-    <%= f.email_field :email %><br><br>
-    <%= f.label :password %>:
-    <%= f.password_field :password %>
-    <%= f.password_field :password_confirmation %><br><br>
-    <%= f.submit "Sign Up"%>
-<% end %>
-binding.pry
+<h1>Sign up</h1>
+<%= render 'form' %>

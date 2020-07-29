@@ -3,9 +3,11 @@ class FilmsController < ApplicationController
     layout 'film'
 
     def index
+        @film = Film.all
     end
 
     def new
+        @film = Film.new
     end
 
     def create

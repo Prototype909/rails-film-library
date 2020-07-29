@@ -10,17 +10,19 @@
   </head>
 
   <body>
-  <body>
-    <div class="wrapper">
-      <div class="topnav">
-      
-      
-      <a href="/logout">Log Out</a>
-      <a href="/films">Films</a>
-      <a href= film_path(films)>Your Films</a>
-      <a href="/films/new" > Add a Film </a>
-      
-      
+  <div class="wrapper" role="navigation">
+      <div class="container">
+        <% if !current_user %>
+          <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
+          <a class="navbar-brand" href="<%= new_user_path %>"/>Sign Up</a>
+          <%= link_to "Sign in", login_path, class:"navbar-brand" %>
+        <% end %>
+        <% if current_user %>
+          <a class="navbar-brand" href="<%= films_path %>"/>Home</a>
+          <%= link_to "#{current_user.username}'s Profile", user_path(current_user), class:"navbar-brand"%>
+          <%= link_to "Sign Out", logout_path, class:"navbar-brand",method:'delete' %>
+        <% end %>
+
     <%= yield %>
   </body>
 </html>
