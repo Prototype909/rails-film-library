@@ -1,19 +1,23 @@
 class FilmsController < ApplicationController
-    before_action :find_film, :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
+    #before_action :find_film, :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
    
 
     def index
         @films = Film.all
+        
     end
 
     def new
         @film = Film.new
+        @genres = Genre.all
     end
 
     def create
-        film = Film.create(film_params)
+       
+        #@film = Film.create(film_params)
         # @film = Film.new(film_params)
-        # @film = current_user.films.build(film_params)
+        @film = current_user.films.build(film_params)
+        #@film.user_id = current_user.id
         if @film.valid?
             @film.save
             redirect_to film_path(@film)
@@ -48,7 +52,7 @@ class FilmsController < ApplicationController
     private
 
     def film_params
-        params.require(:film).permit(:title, :director, :year, :description, :genre_id)
+        params.require(:film).permit(:title, :director, :year, :description, :genre_id, :user_id)
     end
 
     def redirect_if_not_user
