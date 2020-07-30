@@ -37,13 +37,13 @@ class FilmsController < ApplicationController
     end
 
     def show
-        find_film
-        
+        find_film        
     end
 
     def destroy
+        find_film
         @film.destroy
-        redirect_to film_path
+        redirect_to films_path
     end
 
     private

@@ -1,9 +1,9 @@
 <h1>Film's & Comment's</h1>
 
-<% @user.films.each do |film| %>
-    <div>
-    
-    </div>
-  <% end %>
+<% @user.films.each do |film|%>
+  <div>
+  <%= link_to film.title, film_path(film.id) %>
+  </div>
+<%end%>
 
 <p><%= link_to "Create A Film", new_film_path %></p>
