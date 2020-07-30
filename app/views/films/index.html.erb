@@ -1,5 +1,6 @@
 <h1>Show All Films </h1>
-<%= @films.each do |film|%>
-    <%= film.title%>
-    <%end%>
-   
+<% @films.each do |film|%>
+ <div> 
+    <%= link_to film.title, film_path(film.id) %>
+</div>
+<%end%>

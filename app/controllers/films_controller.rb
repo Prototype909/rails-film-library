@@ -9,15 +9,10 @@ class FilmsController < ApplicationController
 
     def new
         @film = Film.new
-        @genres = Genre.all
     end
 
-    def create
-       
-        #@film = Film.create(film_params)
-        # @film = Film.new(film_params)
+    def create 
         @film = current_user.films.build(film_params)
-        #@film.user_id = current_user.id
         if @film.valid?
             @film.save
             redirect_to film_path(@film)
@@ -42,6 +37,8 @@ class FilmsController < ApplicationController
     end
 
     def show
+        find_film
+        
     end
 
     def destroy

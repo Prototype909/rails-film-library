@@ -1,1 +1,15 @@
 <h1>View Film & Comments</h1>
+
+<h1><%= @film.title %></h1>
+
+<b>Year:</b><%= @film.year %><br><br>
+
+<b>Genre:</b><%= @film.genre.name %><br><br>
+
+<b>Director:</b><%= @film.director %><br><br>
+
+<b>Description:</b><%= @film.description %><br><br>
+
+<%= link_to 'Edit', [:edit, @film] %>
+
+
