@@ -10,9 +10,20 @@
 
 <b>Description:</b><%= @film.description %><br><br>
 
-<%= link_to 'Edit', [:edit, @film] %>
+<%= link_to 'Edit Film', [:edit, @film] %>
 
-<%= link_to 'Delete', @film, method: :delete, data: {:confirm => 'Are you sure?'} %>
+<%= link_to 'Delete Film', @film, method: :delete, data: {:confirm => 'Are you sure?'} %>
 
 <%= link_to "Add A Comment", new_film_comment_path(@film) %>
 
+
+
+<%= link_to "Delete A Comment", film_comment_path(@film) %>
+
+<br><br><strong> Comments: </strong><br>
+<% @film.comments.each do |comment| %>
+ "<%= comment.body %>" -by: <b><%= comment.user.username %></b><br>
+ <small><%= link_to  "Edit", edit_film_comment_path(@film, comment) %></small>
+ 
+ <small><%= link_to "Delete", comment, method: :delete, data: {:confirm => 'Are you sure?'} %></small><br><br>
+<% end %>

@@ -2,7 +2,7 @@ class User < ApplicationRecord
     has_secure_password
     has_many :films
     has_many :received_comments, through: :films, source: :comments
-    has_many :comments
+    has_many :comments, dependent: :destroy
     has_many :commented_films, through: :comments, source: :film
 
     validates :username, :email, presence: true

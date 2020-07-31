@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
-    before_action :find_comment, :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
+    before_action :find_comment, only: [:show, :edit, :update, :destroy]
 
     def index
         @user = User.find_by(id: params[:user_id])
         if @user 
-            @comments = @user.comments 
+            @comments = @user.comments
         else 
             @comments = Comment.all
         end 
@@ -16,28 +16,28 @@ class CommentsController < ApplicationController
 
     def create
         @film = Film.find(params[:film_id])
-        @comment = @film.comments.create(comment_params)
-        @comment.user.id = current_user.id
+        @comment = @film.comments.build(comment_params)
+        @comment.user_id = current_user.id
         if @comment.save
             redirect_to film_path(@film)
         else 
-            redirect_to film_path(film)
+            redirect_to films_path(film)
         end
     end
 
     def show
-        @film  = Film.find(parmas[:id])
+        @comment  = Comment.find(params[:id])
     end
 
     def edit
-        @comment = Comment.find_by(id: params[:id])
+        find_comment
     end
 
     def update
-        @comment = Comment.find_by(id: params[:id])
+        find_comment
         if @comment.user == current_user
-            @film.comment.update(comment_params)
-            redirect_to comment_path(@comment)
+            @comment.update(comment_params)
+            redirect_to film_path(@comment.film_id)
         else 
             render :edit 
         end
@@ -45,11 +45,12 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        @comment = Comment.find_by(id: params[:id])
-
-        if @comment.user.id == current_user.id 
+        find_comment
+        if @comment.user == current_user
             @comment.destroy 
-        else 
+            redirect_to films_path(@comment)
+
+        else
             redirect_to films_path 
         end
     end
@@ -59,7 +60,7 @@ class CommentsController < ApplicationController
     private
 
     def comment_params
-        params.require(:comment).permit(:body, :film_id)
+        params.require(:comment).permit(:body, :film_id, user_attributes: [:username])
     end
 
     def find_comment
