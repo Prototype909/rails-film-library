@@ -1,6 +1,6 @@
 <h1>Film's & Comment's</h1>
 
-<% @user.films.each do |film|%>
+<% @user.films.alpha.each do |film|%>
   <div>
   <%= link_to film.title, film_path(film.id) %>
   </div>

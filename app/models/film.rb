@@ -6,6 +6,10 @@ class Film < ApplicationRecord
 
     validates :title, :director, :description, presence: true
     validates :year, numericality: {only_integer: true}
+
+    def self.alpha
+        self.order(:title)
+    end
 end
 
 

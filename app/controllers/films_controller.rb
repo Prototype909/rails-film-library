@@ -1,9 +1,9 @@
 class FilmsController < ApplicationController
-    #before_action :find_film, :redirect_if_not_user, only: [:show, :edit, :update, :destroy]
+    before_action :find_film, :redirect_if_not_user, only: [ :edit, :update, :destroy]
    
 
     def index
-        @films = Film.all
+        @films = Film.alpha
         
     end
 
@@ -17,7 +17,6 @@ class FilmsController < ApplicationController
             @film.save
             redirect_to film_path(@film)
         else
-            @film = Film.find_by_id(params[:film_id]) if params[:film_id]
             render :new
         end
     end
@@ -42,8 +41,10 @@ class FilmsController < ApplicationController
 
     def destroy
         find_film
+        if @film.user == current_user
         @film.destroy
         redirect_to films_path
+        end
     end
 
     private
@@ -54,7 +55,7 @@ class FilmsController < ApplicationController
 
     def redirect_if_not_user
         if @film.user != current_user
-            redirect_to user_path(current_user), alert: "You Do Not Have Permission To Edit This Film!"
+            redirect_to user_path(current_user), alert: "Sorry, You Do Not Have Permission To Edit This Film!"
         end
     end
 
