@@ -3,7 +3,8 @@
     <% @film.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
-        <% end %>
+    <% end %>
+
 <div class="form-group">
     <%= f.label :Title %><br>
     <%= f.text_field :title, class: "form-control" %></div>
