@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RailsFilmLibrary</title>
 
     
@@ -13,9 +14,19 @@
   </head>
 
   <body>
-  <div class="wrapper" role="navigation">
-      <div class="container">
-        <% if !current_user %>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+   
+
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+</nav>
+
+% if !current_user %>
           <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
           <a class="navbar-brand" href="<%= new_user_path %>"/>Sign Up</a>
           <%= link_to "Sign in", login_path, class:"navbar-brand" %>
@@ -24,13 +35,14 @@
           <%= link_to "#{current_user.username}'s Profile", user_path(current_user), class:"navbar-brand"%>
           <%= link_to "Sign Out", logout_path, class:"navbar-brand",method:'delete' %>
         <% end %>
+        
 
-        <% flash.each do |type, msg| %>
-          <div class="alert alert-warning" role="alert" >
-            <%= msg %>
-          </div>
-        <% end %>
+      
 
     <%= yield %>
   </body>
 </html>
+
+
+
+<
