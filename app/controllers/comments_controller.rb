@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
         if @comment.save
             redirect_to film_path(@film)
         else 
-            redirect_to films_path(film)
+            redirect_to films_path(@film)
         end
     end
 

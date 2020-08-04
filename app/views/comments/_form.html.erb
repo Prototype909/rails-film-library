@@ -1,8 +1,15 @@
 
 <%= form_for [@comment.film,@comment] do |f| %>
+  
+        
+    
+
     <%= f.hidden_field :film_id %>
     
     <%= f.text_area :body %>
     <br>
     <%= f.submit "Leave Comment"%>
 <% end %>
+
+
+

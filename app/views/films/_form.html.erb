@@ -1,7 +1,7 @@
 <%=form_for(@film) do |f|%>
     <% if @film.errors.any? %>
     <% @film.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+        <li class="error_message"><%= message %></li>
         <% end %>
     <% end %>
 
@@ -31,3 +31,4 @@
     <%= f.submit class: "btn btn-primary" %>
     </div>
     <% end %>
+
