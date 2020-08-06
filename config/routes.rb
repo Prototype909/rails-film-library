@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
   delete '/logout' => 'sessions#destroy'
 
+  get '/films/favorite' => 'films#favorite'
+
     
   resources :users, only: [:new, :create, :show,]
   resources :comments
@@ -24,4 +26,5 @@ Rails.application.routes.draw do
   resources :films do
     resources :comments     
     end
+    
 end

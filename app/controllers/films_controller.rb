@@ -22,11 +22,10 @@ class FilmsController < ApplicationController
     end
 
     def edit
-        find_film
+        
     end
 
-    def update
-        find_film
+    def update        
         if @film.user == current_user
             @film.update(film_params)
             redirect_to film_path(@film)
@@ -39,12 +38,16 @@ class FilmsController < ApplicationController
         find_film        
     end
 
-    def destroy
-        find_film
+    def destroy        
         if @film.user == current_user
         @film.destroy
         redirect_to films_path
         end
+    end
+
+    def favorite
+        @films = Film.favorite_films
+        render :index
     end
 
     private

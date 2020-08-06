@@ -27,7 +27,7 @@
           <a class="navbar-brand" href="<%= films_path %>"/>Home</a>
 
           <%= link_to "#{current_user.username}'s Profile", user_path(current_user), class:"navbar-brand"%>
-
+          <%= link_to "Most Commented", '/films/favorite', class:"navbar-brand" %>
           <%= link_to "Sign Out", logout_path, class:"navbar-brand",method:'delete' %>
       <% end %>  
 
