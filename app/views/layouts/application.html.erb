@@ -15,25 +15,26 @@
 
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-
-    
+    <div class="navbar-brand">    
 
     <% if !current_user %>
           <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
           <a class="navbar-brand" href="<%= new_user_path %>"/>Sign Up</a>
           <%= link_to "Sign in", login_path, class:"navbar-brand" %>
       <% else %>
-          <a class="navbar-brand" href="<%= films_path %>"/>Home</a>
+          <a class="navbar-brand" href="<%= films_path %>"/>All Films</a>
 
           <%= link_to "#{current_user.username}'s Profile", user_path(current_user), class:"navbar-brand"%>
-          <%= link_to "Most Commented", '/films/favorite', class:"navbar-brand" %>
+         
           <%= link_to "Sign Out", logout_path, class:"navbar-brand",method:'delete' %>
       <% end %>  
-
    
   </div>
 </nav>
+
+<% flash.each do |name, message| -%>
+  <%= content_tag :div, message, class: "notification is-warning" %>
+<% end %>
 
     <%= yield %>
   </body>

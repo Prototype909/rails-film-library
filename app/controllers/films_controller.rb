@@ -1,5 +1,6 @@
 class FilmsController < ApplicationController
-    before_action :find_film, :redirect_if_not_user, only: [ :edit, :update, :destroy]
+    before_action :find_film, only: [:show, :edit, :update, :destroy]
+    before_action :redirect_if_not_user, only: [:edit, :update, :destroy]
    
 
     def index
@@ -45,10 +46,7 @@ class FilmsController < ApplicationController
         end
     end
 
-    def favorite
-        @films = Film.favorite_films
-        render :index
-    end
+    
 
     private
 

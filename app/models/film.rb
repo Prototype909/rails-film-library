@@ -11,9 +11,7 @@ class Film < ApplicationRecord
         self.order(:title)
     end
 
-    def self.favorite_films        
-        self.left_joins(:comments).group('films.id').order('COUNT(film_id) DESC')
-    end
+   
   
 end
 
