@@ -8,6 +8,11 @@ class FilmsController < ApplicationController
         
     end
 
+    def favorites
+        @films = Film.favorite_films
+        render:index
+    end
+
     def new
         @film = Film.new
     end
